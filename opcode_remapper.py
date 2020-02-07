@@ -30,5 +30,10 @@ for line in current_opcode_file.readlines():
             line = line.replace(rex.group('code'), str(new_code))
             new_opcode_file.write(line)
             previous_code = new_code
+    elif line.startswith('has'):
+        num = re.findall(r'\d+', line)
+        if len(num) > 0:
+            line = line.replace(num[0], str(previous_code))
+        new_opcode_file.write(line)
     else:
         new_opcode_file.write(line)
